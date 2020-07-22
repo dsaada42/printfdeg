@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 12:01:01 by dsaada            #+#    #+#             */
-/*   Updated: 2020/07/22 01:52:22 by dsaada           ###   ########.fr       */
+/*   Updated: 2020/07/22 15:45:30 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ t_value			*ft_new_value(void);
 int				ft_printer(t_value *val);
 void			ft_add_value_back(t_value **alst, t_value *new);
 int				ft_parser(t_value **list, const char *str, va_list a_list);
+int				ft_print_list(t_value **list);
 
 #endif

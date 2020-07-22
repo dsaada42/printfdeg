@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 15:25:02 by dsaada            #+#    #+#             */
-/*   Updated: 2020/07/22 05:19:09 by dsaada           ###   ########.fr       */
+/*   Updated: 2020/07/22 16:08:02 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,7 @@ char	*ft_convert(t_value *val, va_list a_list)
 	else if (val->type == 'c')
 		str = ft_convert_char(va_arg(a_list, int));
 	else if (val->type == 's')
-	{
-		if (!(str = va_arg(a_list, char*)))
-			str = ft_strdup("(null)");
-	}
+		str = ft_convert_str(va_arg(a_list, char*));
 	else if (val->type == 'p')
 		str = ft_convert_ptr(va_arg(a_list, void*));
 	else if (val->type == 'x')

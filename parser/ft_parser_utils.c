@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 23:48:31 by dsaada            #+#    #+#             */
-/*   Updated: 2020/07/22 02:17:36 by dsaada           ###   ########.fr       */
+/*   Updated: 2020/07/22 15:01:42 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ t_value	*ft_free(t_value *val)
 t_value	*ft_parser_value(const char *str, va_list a_list, int *i)
 {
 	t_value	*new;
-	char	*res;
 	int		ret;
 
 	if (!(new = ft_indicator_parser(&str[*i])))
@@ -63,14 +62,11 @@ t_value	*ft_parser_value(const char *str, va_list a_list, int *i)
 	if ((ret = ft_width_parser(&str[*i], new)) == -1)
 		return (ft_free(new));
 	if (ret)
-	{
-		new->width = va_arg(a_list, int);
-		if (new->width < 0)
+		if ((new->width = va_arg(a_list, int)) < 0)
 		{
 			new->width = -1 * new->width;
 			new->minus += 1;
 		}
-	}
 	if (!(ft_dot_parser(&str[*i], new)))
 		return (ft_free(new));
 	if ((ret = ft_precision_parser(&str[*i], new)) == -1)
@@ -79,9 +75,8 @@ t_value	*ft_parser_value(const char *str, va_list a_list, int *i)
 		new->precision = va_arg(a_list, int);
 	if (!(ft_type_parser(&str[*i], new)))
 		return (ft_free(new));
-	if (!(res = ft_convert(new, a_list)))
+	if (!(new->toprint = ft_convert(new, a_list)))
 		return (NULL);
-	new->toprint = res;
 	(*i) += new->size;
 	return (new);
 }

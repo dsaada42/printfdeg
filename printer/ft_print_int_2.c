@@ -1,47 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_utils.c                                 :+:      :+:    :+:   */
+/*   ft_print_int_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/16 16:44:19 by dsaada            #+#    #+#             */
-/*   Updated: 2020/07/22 16:07:25 by dsaada           ###   ########.fr       */
+/*   Created: 2020/07/22 15:34:56 by dsaada            #+#    #+#             */
+/*   Updated: 2020/07/22 15:35:46 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_convert.h"
+#include "ft_printer.h"
 
-int		ft_count_hexa(unsigned int nb)
+int		ft_int_printer(t_value *val, int sign, int nbspaces)
 {
-	int cpt;
+	int	i;
 
-	cpt = 0;
-	while (nb)
+	i = 0;
+	if (val->minus)
 	{
-		nb = nb / 16;
-		cpt++;
+		i = ft_print_int_precision(val, sign);
+		i += ft_print_spaces(nbspaces);
 	}
-	return (cpt);
-}
-
-int		ft_count_hexa_ptr(unsigned long int nb)
-{
-	int cpt;
-
-	cpt = 0;
-	while (nb)
+	else if (!(val->zero))
 	{
-		nb = nb / 16;
-		cpt++;
+		i = ft_print_spaces(nbspaces);
+		i += ft_print_int_precision(val, sign);
 	}
-	return (cpt);
-}
-
-char	*ft_convert_str(char *str)
-{
-	if (!str)
-		return (ft_strdup("(null)"));
 	else
-		return (ft_strdup(str));
+		i = ft_print_int_zero(val, sign);
+	return (i);
 }
